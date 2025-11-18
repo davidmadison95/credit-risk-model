@@ -1,0 +1,225 @@
+"""
+Configuration file for Credit Risk Scoring Model
+Contains all constants, paths, and hyperparameters
+"""
+
+import os
+from pathlib import Path
+
+# ==================== PROJECT PATHS ====================
+PROJECT_ROOT = Path(__file__).parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+RAW_DATA_DIR = DATA_DIR / "raw"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+MODELS_DIR = PROJECT_ROOT / "models"
+OUTPUTS_DIR = PROJECT_ROOT / "outputs"
+FIGURES_DIR = OUTPUTS_DIR / "figures"
+METRICS_DIR = OUTPUTS_DIR / "metrics"
+
+# Create directories if they don't exist
+for directory in [RAW_DATA_DIR, PROCESSED_DATA_DIR, MODELS_DIR, 
+                  FIGURES_DIR, METRICS_DIR]:
+    directory.mkdir(parents=True, exist_ok=True)
+
+# ==================== DATA FILES ====================
+RAW_DATA_FILE = RAW_DATA_DIR / "credit_data.csv"
+TRAIN_DATA_FILE = PROCESSED_DATA_DIR / "train_data.csv"
+TEST_DATA_FILE = PROCESSED_DATA_DIR / "test_data.csv"
+FEATURE_ENGINEERED_FILE = PROCESSED_DATA_DIR / "feature_engineered.csv"
+
+# ==================== MODEL FILES ====================
+LOGISTIC_MODEL_FILE = MODELS_DIR / "logistic_regression.pkl"
+RANDOM_FOREST_MODEL_FILE = MODELS_DIR / "random_forest.pkl"
+XGBOOST_MODEL_FILE = MODELS_DIR / "xgboost_model.pkl"
+SCALER_FILE = MODELS_DIR / "scaler.pkl"
+LABEL_ENCODER_FILE = MODELS_DIR / "label_encoder.pkl"
+
+# ==================== RANDOM SEED ====================
+RANDOM_STATE = 42
+
+# ==================== DATA PREPROCESSING ====================
+TEST_SIZE = 0.2
+VALIDATION_SIZE = 0.1
+
+# Missing value thresholds
+MISSING_THRESHOLD = 0.5  # Drop features with >50% missing values
+
+# Outlier detection
+OUTLIER_METHOD = "IQR"  # Options: "IQR", "Z-score"
+IQR_MULTIPLIER = 1.5
+Z_SCORE_THRESHOLD = 3
+
+# ==================== FEATURE ENGINEERING ====================
+# Categorical features for one-hot encoding
+CATEGORICAL_FEATURES = [
+    "person_home_ownership",
+    "loan_intent",
+    "person_default_on_file"
+]
+
+# Ordinal features for label encoding
+ORDINAL_FEATURES = {
+    "loan_grade": ["A", "B", "C", "D", "E", "F", "G"]
+}
+
+# Numerical features for scaling
+NUMERICAL_FEATURES = [
+    "age",
+    "person_income",
+    "person_emp_length",
+    "loan_amnt",
+    "loan_int_rate",
+    "loan_percent_income",
+    "cb_person_cred_hist_length"
+]
+
+# Feature selection thresholds
+CORRELATION_THRESHOLD = 0.95  # Remove highly correlated features
+MUTUAL_INFO_THRESHOLD = 0.01  # Minimum mutual information score
+
+# ==================== TARGET VARIABLE ====================
+TARGET_COLUMN = "risk_tier"
+TARGET_CLASSES = ["Low Risk", "Medium Risk", "High Risk"]
+
+# Risk tier mapping from loan_status
+RISK_TIER_MAPPING = {
+    # This will be defined based on additional features
+    # Example logic:
+    # Low Risk: No default + good credit + stable income
+    # Medium Risk: Moderate indicators
+    # High Risk: Default history or poor indicators
+}
+
+# ==================== CLASS IMBALANCE ====================
+USE_SMOTE = True
+SMOTE_SAMPLING_STRATEGY = "auto"  # Balance all classes
+SMOTE_K_NEIGHBORS = 5
+
+# ==================== MODEL HYPERPARAMETERS ====================
+
+# Logistic Regression
+LOGISTIC_PARAMS = {
+    "penalty": "l2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 1000,
+    "random_state": RANDOM_STATE,
+    "multi_class": "multinomial"
+}
+
+LOGISTIC_GRID = {
+    "C": [0.01, 0.1, 1, 10, 100],
+    "penalty": ["l2"],
+    "solver": ["lbfgs", "saga"]
+}
+
+# Random Forest
+RANDOM_FOREST_PARAMS = {
+    "n_estimators": 100,
+    "max_depth": 10,
+    "min_samples_split": 10,
+    "min_samples_leaf": 4,
+    "random_state": RANDOM_STATE,
+    "n_jobs": -1
+}
+
+RANDOM_FOREST_GRID = {
+    "n_estimators": [100, 200, 300],
+    "max_depth": [5, 10, 15, None],
+    "min_samples_split": [5, 10, 20],
+    "min_samples_leaf": [2, 4, 8]
+}
+
+# XGBoost
+XGBOOST_PARAMS = {
+    "n_estimators": 100,
+    "max_depth": 6,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": RANDOM_STATE,
+    "eval_metric": "mlogloss",
+    "use_label_encoder": False
+}
+
+XGBOOST_GRID = {
+    "n_estimators": [100, 200, 300],
+    "max_depth": [3, 6, 9],
+    "learning_rate": [0.01, 0.1, 0.3],
+    "subsample": [0.7, 0.8, 0.9],
+    "colsample_bytree": [0.7, 0.8, 0.9]
+}
+
+# ==================== MODEL TRAINING ====================
+CV_FOLDS = 5
+SCORING_METRIC = "f1_weighted"
+ENABLE_HYPERPARAMETER_TUNING = True
+N_ITER_RANDOM_SEARCH = 20  # For RandomizedSearchCV
+
+# ==================== MODEL EVALUATION ====================
+EVALUATION_METRICS = [
+    "accuracy",
+    "precision_weighted",
+    "recall_weighted",
+    "f1_weighted",
+    "roc_auc_ovr"
+]
+
+# ==================== SHAP EXPLAINABILITY ====================
+SHAP_SAMPLE_SIZE = 100  # Number of samples for SHAP computation
+SHAP_MAX_DISPLAY = 20   # Maximum features to display in plots
+
+# ==================== STREAMLIT APP ====================
+APP_TITLE = "Credit Risk Scoring Dashboard"
+APP_ICON = "💳"
+PAGE_CONFIG = {
+    "page_title": "Credit Risk Model",
+    "page_icon": "💳",
+    "layout": "wide",
+    "initial_sidebar_state": "expanded"
+}
+
+# Input ranges for Streamlit sliders
+INPUT_RANGES = {
+    "age": (18, 100),
+    "person_income": (10000, 500000),
+    "person_emp_length": (0, 50),
+    "loan_amnt": (500, 50000),
+    "loan_int_rate": (5.0, 25.0),
+    "loan_percent_income": (0.0, 1.0),
+    "cb_person_cred_hist_length": (0, 30)
+}
+
+# ==================== LOGGING ====================
+LOG_LEVEL = "INFO"
+LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# ==================== VISUALIZATION ====================
+PLOT_STYLE = "seaborn-v0_8-darkgrid"
+FIGURE_DPI = 100
+FIGURE_SIZE = (12, 8)
+COLOR_PALETTE = "Set2"
+
+# Risk tier colors
+RISK_COLORS = {
+    "Low Risk": "#2ecc71",      # Green
+    "Medium Risk": "#f39c12",   # Orange
+    "High Risk": "#e74c3c"      # Red
+}
+
+# ==================== FEATURE DESCRIPTIONS ====================
+FEATURE_DESCRIPTIONS = {
+    "age": "Applicant's age in years",
+    "person_income": "Annual income (USD)",
+    "person_emp_length": "Employment length (years)",
+    "loan_amnt": "Loan amount requested (USD)",
+    "loan_int_rate": "Interest rate (%)",
+    "loan_percent_income": "Loan as % of income",
+    "cb_person_cred_hist_length": "Credit history length (years)",
+    "person_home_ownership": "Home ownership status",
+    "loan_intent": "Purpose of loan",
+    "loan_grade": "Assigned loan grade",
+    "person_default_on_file": "Previous default on record"
+}
+
+print(f"Configuration loaded successfully. Random state: {RANDOM_STATE}")
