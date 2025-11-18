@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.Python
+venv/
+env/
+
+# Data files
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.pkl
+
+# Models
+models/*.pkl
+models/*.joblib
+
+# Outputs
+outputs/figures/*.png
+outputs/reports/*.csv
+outputs/logs/*.log
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+```
+
+---
+
+### 3. **Extra File (Optional)** ⚠️
+```
+setup_project.py  ← Not part of original project
