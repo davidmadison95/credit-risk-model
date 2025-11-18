@@ -72,6 +72,16 @@ st.markdown("""
 @st.cache_resource
 def load_models_and_artifacts():
     """Load all trained models and preprocessing artifacts."""
+    # Check if models exist
+    models_exist = all([
+        os.path.exists('models/logistic_regression.pkl'),
+        os.path.exists('models/random_forest.pkl'),
+        os.path.exists('models/xgboost.pkl')
+    ])
+    
+    if not models_exist:
+        return None, None, None, None
+    
     try:
         models = {
             'Logistic Regression': load_model('models/logistic_regression.pkl'),
@@ -377,7 +387,82 @@ def main():
     models, scaler, selected_features, config = load_models_and_artifacts()
     
     if models is None:
-        st.error("Failed to load models. Please ensure models are trained and saved.")
+        st.warning("⚠️ **Models Not Yet Trained**")
+        st.info("""
+        ### 🚧 Dashboard in Demo Mode
+        
+        The ML models haven't been trained yet. To explore the full project:
+        
+        **📂 View the Complete Project**
+        - **GitHub:** [github.com/davidmadison95/credit-risk-model](https://github.com/davidmadison95/credit-risk-model)
+        - **Documentation:** Complete README with setup instructions
+        - **Notebooks:** Jupyter notebooks with full analysis
+        - **Source Code:** All Python modules available
+        
+        **🚀 Train the Models Yourself**
+```bash
+        # Clone the repository
+        git clone https://github.com/davidmadison95/credit-risk-model.git
+        cd credit-risk-model
+        
+        # Install dependencies
+        pip install -r requirements.txt
+        
+        # Generate sample data
+        python data/generate_sample_data.py
+        
+        # Run the complete pipeline
+        python src/data_preprocessing.py
+        python src/feature_engineering.py
+        python src/train_models.py
+        python src/evaluate.py
+        python src/explainability.py
+```
+        
+        **🏆 Project Highlights**
+        - ✅ **3 ML Models:** Logistic Regression, Random Forest, XGBoost
+        - ✅ **87% F1 Score, 92% ROC-AUC** achieved with XGBoost
+        - ✅ **SHAP Explainability** for model interpretation
+        - ✅ **Complete Pipeline:** Data preprocessing → Training → Deployment
+        - ✅ **Production-Ready:** Modular code, comprehensive testing
+        
+        **📧 Contact**
+        - **Email:** davidmadison95@yahoo.com
+        - **LinkedIn:** [linkedin.com/in/davidmadison95](https://www.linkedin.com/in/davidmadison95/)
+        - **Portfolio:** [davidmadison95.github.io/Business-Portfolio](https://davidmadison95.github.io/Business-Portfolio/)
+        
+        ---
+        
+        ### 📊 Expected Performance
+        
+        | Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+        |-------|----------|-----------|--------|----------|---------|
+        | **XGBoost** 🏆 | 0.872 | 0.865 | 0.872 | **0.868** | **0.916** |
+        | Random Forest | 0.857 | 0.849 | 0.857 | 0.852 | 0.901 |
+        | Logistic Regression | 0.823 | 0.816 | 0.823 | 0.819 | 0.857 |
+        
+        ### 🎯 Risk Classification Logic
+        
+        **Low Risk:** No defaults + DTI < 25% + Rate < 10% + Grades A-B  
+        **Medium Risk:** Moderate factors + DTI 25-40% + Rate 10-15% + Grades C-E  
+        **High Risk:** Previous defaults OR DTI > 40% OR Rate > 15% OR Grades F-G  
+        
+        ---
+        
+        💡 *This is a portfolio demonstration project showcasing end-to-end ML capabilities.*
+        """)
+        
+        st.markdown("---")
+        st.markdown("""
+        <div style='text-align: center; color: #666;'>
+            <p>Built with ❤️ by David Madison | Data Analyst | Machine Learning Enthusiast</p>
+            <p>
+                <a href='https://github.com/davidmadison95' target='_blank'>GitHub</a> | 
+                <a href='https://www.linkedin.com/in/davidmadison95/' target='_blank'>LinkedIn</a> | 
+                <a href='https://davidmadison95.github.io/Business-Portfolio/' target='_blank'>Portfolio</a>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
         return
     
     # Create tabs
