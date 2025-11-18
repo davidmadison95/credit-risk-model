@@ -21,3 +21,81 @@ shap>=0.43.0
 
 # Configuration
 pyyaml>=6.0
+```
+
+---
+
+## 🎯 Step-by-Step GitHub Update
+
+### **Step 1: Navigate to File**
+1. Go to: https://github.com/davidmadison95/credit-risk-model
+2. Click on **`requirements.txt`** (in the file list)
+
+### **Step 2: Edit File**
+3. Click the **pencil icon** ✏️ (top right, says "Edit this file")
+
+### **Step 3: Replace Content**
+4. **Select all** current content (Ctrl+A or Cmd+A)
+5. **Delete** it
+6. **Copy** the code block above (all 20 lines)
+7. **Paste** into the empty file
+
+### **Step 4: Commit Changes**
+8. Scroll to bottom of page
+9. **Commit message:** 
+```
+   Fix: Update package versions for Python 3.13 compatibility
+```
+10. **Extended description (optional):**
+```
+   - Upgrade numpy from 1.24.3 to >=1.26.0
+   - Upgrade pandas from 2.0.3 to >=2.1.0
+   - Upgrade all packages for Python 3.13 support
+   - Use flexible versioning (>=) instead of pinned versions
+```
+11. Click **"Commit changes"** (green button)
+
+---
+
+## ✅ Verification
+
+After committing, you should see:
+- ✅ File updated on GitHub
+- ✅ Last commit message: "Fix: Update package versions..."
+- ✅ Streamlit Cloud starts auto-redeployment (check your Streamlit dashboard)
+
+---
+
+## ⏱️ What Happens Next
+
+### **Automatic Process:**
+
+**0:00** - You click "Commit changes"  
+**0:30** - Streamlit detects the update  
+**1:00** - Starts redeployment  
+**1:30** - Clones repository  
+**2:00** - Installs new packages (this will take longer, 2-3 min)  
+**4:00** - Packages installed successfully  
+**4:30** - Starts Streamlit app  
+**5:00** - **Either succeeds or shows next error**  
+
+---
+
+## 🎯 Expected Outcomes
+
+### **Outcome A: Dependencies Install Successfully! ✅**
+
+You'll see in logs:
+```
+✓ Installing streamlit>=1.28.0... done
+✓ Installing pandas>=2.1.0... done  
+✓ Installing numpy>=1.26.0... done
+✓ Installing scikit-learn>=1.3.0... done
+✓ Installing xgboost>=2.0.0... done
+✓ All packages installed successfully!
+🚀 Starting app...
+```
+
+**Then you'll likely see:**
+```
+FileNotFoundError: [Errno 2] No such file or directory: 'models/xgboost.pkl'
