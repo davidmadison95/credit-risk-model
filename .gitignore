@@ -2,36 +2,159 @@
 __pycache__/
 *.py[cod]
 *.so
+*.egg
 *.egg-info/
+dist/
+build/
 .Python
 venv/
 env/
+ENV/
 
 # Data files
 data/raw/*.csv
 data/processed/*.csv
 data/processed/*.pkl
+*.csv
 
-# Models
+# Models (large files)
 models/*.pkl
 models/*.joblib
+models/*.h5
+*.pkl
+*.joblib
 
 # Outputs
 outputs/figures/*.png
+outputs/figures/*.jpg
 outputs/reports/*.csv
+outputs/reports/*.txt
 outputs/logs/*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
 
 # IDEs
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 .DS_Store
 
-# Jupyter
-.ipynb_checkpoints/
+# Environment
+.env
+.venv
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
 ```
+
+#### Then Upload It:
+1. Go to your repository: `https://github.com/davidmadison95/credit-risk-model`
+2. Click **"Add file"** → **"Upload files"**
+3. Upload `.gitignore`
+4. Commit message: `Add .gitignore to prevent large files`
+5. Click **"Commit changes"**
 
 ---
 
-### 3. **Extra File (Optional)** ⚠️
+## 🎯 After Upload is Complete
+
+### Verify Your Repository:
+
+1. **Go to:** `https://github.com/davidmadison95/credit-risk-model`
+2. **Check that you see:**
+   - ✅ README.md displays nicely with formatting
+   - ✅ All folders are visible (app, config, data, src, etc.)
+   - ✅ File count shows ~19-20 files
+   - ✅ Your profile picture and name appear as author
+
+---
+
+## 📋 Post-Upload Checklist
+
+### Repository Settings:
+
+1. **Add Description**
+   - Click ⚙️ "Settings" (top right of repo)
+   - Under "About", click edit (⚙️ icon)
+   - **Description:** `Production-ready ML system for credit risk assessment with XGBoost (87% F1, 92% ROC-AUC), SHAP explainability, and Streamlit dashboard`
+   - **Website:** `https://davidmadison95.github.io/Business-Portfolio/`
+   - **Topics:** Add these tags:
+     - `machine-learning`
+     - `credit-risk`
+     - `xgboost`
+     - `shap`
+     - `streamlit`
+     - `data-science`
+     - `python`
+     - `portfolio-project`
+   - Click "Save changes"
+
+2. **Pin Repository**
+   - Go to your profile: `https://github.com/davidmadison95`
+   - Click "Customize your pins"
+   - Select `credit-risk-model`
+   - This makes it prominent on your profile!
+
+---
+
+## 🌟 Optional: Deploy Dashboard
+
+### Deploy to Streamlit Cloud (Free!):
+
+1. Go to [share.streamlit.io](https://share.streamlit.io)
+2. Sign in with GitHub
+3. Click **"New app"**
+4. **Repository:** `davidmadison95/credit-risk-model`
+5. **Branch:** `main`
+6. **Main file path:** `app/streamlit_app.py`
+7. Click **"Deploy!"**
+8. Wait 2-3 minutes
+9. Get your public URL!
+
+**Add this URL to:**
+- GitHub repo description
+- README.md (add a badge)
+- Your portfolio website
+- LinkedIn profile
+
+---
+
+## 📱 Social Media Announcement
+
+### LinkedIn Post Template:
 ```
-setup_project.py  ← Not part of original project
+🚀 Excited to share my latest project: Credit Risk Scoring Model
+
+I built a production-ready machine learning system that predicts loan 
+default risk with 87% F1 score and 92% ROC-AUC.
+
+Key Features:
+✅ Three ML models (Logistic Regression, Random Forest, XGBoost)
+✅ SHAP explainability for transparent AI decisions
+✅ Interactive Streamlit dashboard for real-time predictions
+✅ Complete end-to-end pipeline with 5,000+ lines of code
+
+This project demonstrates my skills in:
+- Python programming
+- Machine learning (scikit-learn, XGBoost)
+- Model explainability (SHAP)
+- Web development (Streamlit)
+- Data analysis and visualization
+
+Tech Stack: Python | scikit-learn | XGBoost | SHAP | Streamlit | Pandas
+
+🔗 Check it out on GitHub: https://github.com/davidmadison95/credit-risk-model
+🌐 Live Demo: [your-streamlit-url]
+
+#MachineLearning #DataScience #Python #CreditRisk #Portfolio #XGBoost 
+#SHAP #Streamlit #DataAnalytics
